@@ -40,11 +40,6 @@
 
 ;Ejercicio 03.- Función primes
 
-(define isPrime
-  (lambda n)
-  (cond
-    ))
-
 ;Ejercicio 04.- Función zip
 (define zip
   (lambda (lista1 lista2)
