@@ -40,16 +40,42 @@
 
 ;Ejercicio 03.- Función primes
 
+
 ;Ejercicio 04.- Función zip
 (define zip
   (lambda (lista1 lista2)
     (cond
       [(null? lista1) '()]
       [(null? lista2) '()]
-      [else (cons (list (first lista1)
-                          (first lista2)) (zip (cdr lista1) (cdr lista2)))])))
+      [else (cons (list (first lista1) (first lista2)) (zip (cdr lista1) (cdr lista2)))])))
 
 ;Ejercicio 05.- Función reduce
-;(define reduce (lambda (funcion lista)
-;                 (cond
-;                   [(null? lista)])))(zip '(1 2) '(3 4))
+(define reduce
+  (lambda (funcion lista)
+    (cond
+      [(null? lista) lista]
+      [(symbol=? (numElementos lista) 1) (first lista)]
+      [else (funcion (funcion (first lista) (second lista)) (reduce funcion (cdr (cdr lista))))])))
+
+;Sección II
+;Ejercicio 06.- Función mconcat
+(define mconcat
+  (lambda (lista1 lista2)
+    (cond
+      [(null? lista1) lista2]
+      [else (cons (car lista1) (mconcat (cdr lista1) lista2))])))
+
+;Ejercicio 07.- Función mmap
+(define mmap
+  (lambda (funcion lista)
+    (cond
+      [(null? lista) '()]
+      [else (cons (funcion (car lista)) (mmap funcion (cdr lista)))])))
+
+
+;Ejercicio 08.- Función mfilter
+(define mfilter
+  (lambda (predicate lista)
+    (cond
+      [(null? lista) '()]
+      )))
