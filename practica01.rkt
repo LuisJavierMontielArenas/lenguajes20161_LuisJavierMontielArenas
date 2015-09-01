@@ -39,6 +39,31 @@
 ;(test (average '(1 1 1 1 1 1 1 1 1 1 1 1)) 1)
 
 ;Ejercicio 03.- Función primes
+;Implementamos las funciones auxiliares isPrime
+(define primes
+  (lambda (n)
+    (primAux n 2 '())))
+
+(define isPrime
+  (lambda (n p)
+    (cond
+      [(= n p) #t]
+      [(= (modulo p n) 0) #f]
+      [else (isPrime (+ n 1) p)])))
+  
+
+(define primAux
+  (lambda (n m acc)
+    (cond
+      [(= (+ n 1) m) (reverse acc '())]
+      [(isPrime 2 m) (primAux n (+ m 1) (cons m acc))]
+      [else (primAux n (+ m 1) acc)])))
+  
+(define reverse
+  (lambda (lista acc)
+    (cond
+      [(null? lista) acc]
+      [else (reverse (cdr lista) (cons (car lista) acc))])))
 
 
 ;Ejercicio 04.- Función zip
@@ -74,8 +99,23 @@
 
 
 ;Ejercicio 08.- Función mfilter
-(define mfilter
-  (lambda (predicate lista)
+;(define mfilter
+;  (lambda (predicate lista)
+;    (cond
+;      [(null? lista) '()]
+;      )))
+
+;Ejercicio 10.- Función every?
+;(define every?
+;  (lambda (predicate lista)
+;    (cond
+;      [(null? lista) '()]
+;      )))
+
+;Ejercicio 11.- Función mpowerset
+
+(define mpowerset
+  (lambda (lista)
     (cond
-      [(null? lista) '()]
-      )))
+      [(null? lista) '(())]
+      [else (let ((cdr (mpowerset (cdr lista)))) (mconcat (mmap ( lambda (listatemp) (cons (car lista) listatemp)) cdr) cdr))])))
