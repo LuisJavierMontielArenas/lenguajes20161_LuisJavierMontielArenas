@@ -104,12 +104,31 @@
 ;      [(null? lista) '()]
 ;      )))
 
-;Ejercicio 10.- Función every?
-;(define every?
-;  (lambda (predicate lista)
-;    (cond
-;      [(null? lista) '()]
-;      )))
+;Ejercicio 09.- Función any? y pruebas
+(define any?
+  (lambda (propocision lista)
+    (cond 
+      [(null? lista) #f]
+      [(propocision (first lista)) #t]
+      [else (any? propocision (cdr lista))])))
+;(test (any? number? '()) #f)
+;(test (any? number? '(a b c d 1)) #t)
+;(test (any? symbol? '(1 2 3 4)) #f)
+;(test (any? symbol? '(1 2 3 4 q 1 2)) #t)
+;(test (any? number? '(a b c 0 d e f)) #t)
+
+;Ejercicio 10.- Función every? y pruebas
+(define every?
+  (lambda (propocision lista)
+    (cond
+      [(null? lista) #t]
+      [(propocision (first lista)) (every? propocision (cdr lista))]
+      [else #f])))
+;(test (every? number? '()) #t)
+;(test (every? number? '(1 2 3)) #t)
+;(test (every? number? '(1 2 3 a)) #f)
+;(test (every? symbol? '(1 2 3 a)) #f)
+;(test (every? symbol? '(a b c d e f g h)) #t)
 
 ;Ejercicio 11.- Función mpowerset
 
