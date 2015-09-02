@@ -89,7 +89,7 @@
                  (cond
                    [(null? lista) base]
                    [(eqv? (numElementos lista) 1) (first lista)]
-                   [else (funcion (funcion (first lista) (second lista)) (reduce funcion (cdr (cdr lista)) base))])))
+                   [else (funcion (first lista) (reduce funcion (cdr lista) base))])))
 
 
 ;Sección II
