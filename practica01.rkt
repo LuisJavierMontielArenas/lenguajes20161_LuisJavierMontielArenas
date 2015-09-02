@@ -117,7 +117,9 @@
     (cond
       [(null? lista) '()]
       [else (cons (funcion (car lista)) (mmap funcion (cdr lista)))])))
-
+;(test (mmap add1 '(1 2 3 4)) '(2 3 4 5))
+;(test (mmap car '((1 2 3) (4 5 6) (7 8 9))) '(1 4 7))
+;(test (mmap cdr '((1 2 3) (4 5 6) (7 8 9))) '((2 3) (5 6) (8 9)))
 
 ;Ejercicio 08.- Función mfilter
 ;(define mfilter
