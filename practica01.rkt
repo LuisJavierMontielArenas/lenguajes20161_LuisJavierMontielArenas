@@ -64,6 +64,11 @@
       [(null? lista) acc]
       [else (reverse (cdr lista) (cons (car lista) acc))])))
 
+;(test (primes 30) '(2 3 5 7 11 13 17 19 23 29))
+;(test (primes 11) '(2 3 5 7 11))
+;(test (primes 1) '())
+;(test (primes 2) '(2))
+;(test (primes 50) '(2 3 5 7 11 13 17 19 23 29 31 37 41 43 47))
 
 ;Ejercicio 04.- Función zip
 (define zip
