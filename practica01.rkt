@@ -78,6 +78,12 @@
       [(null? lista2) '()]
       [else (cons (list (first lista1) (first lista2)) (zip (cdr lista1) (cdr lista2)))])))
 
+;(test (zip '(1 2) '(3 4)) '((1 3) (2 4)))
+;(test (zip '(1 2 3) '()) '())
+;(test (zip '() '(4 5 6)) '())
+;(test (zip '(8 9) '(3 2 1 4)) '((8 3) (9 2)))
+;(test (zip '(8 9 1 2) '(3 4)) '((8 3) (9 4)))      
+
 ;Ejercicio 05.- Función reduce
 (define reduce
   (lambda (funcion lista)
