@@ -91,6 +91,11 @@
                    [(eqv? (numElementos lista) 1) (first lista)]
                    [else (funcion (first lista) (reduce funcion (cdr lista) base))])))
 
+;(test (reduce + '(1 2 3 4 5 6 7 8 9 10) 0) 55)
+;(test (reduce zip '((1 2 3) (4 5 6) (7 8 9)) '()) '((1 (4 7)) (2 (5 8)) (3 (6 9))))
+;(test (reduce * '(1 2 3 4 5) 0) 120)
+;(test (reduce + '(10 10 10 10 10 10 10 10 10 10) 0) 100)
+;(test (reduce mconcat '(() (1 2) (a b)) '()) '(1 2 a b))
 
 ;Sección II
 ;Ejercicio 06.- Función mconcat
