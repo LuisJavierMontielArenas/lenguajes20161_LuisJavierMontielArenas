@@ -105,6 +105,12 @@
       [(null? lista1) lista2]
       [else (cons (car lista1) (mconcat (cdr lista1) lista2))])))
 
+;(test (mconcat '(1 2 3) '(4 5 6)) '(1 2 3 4 5 6))
+;(test (mconcat '() '(4 5 6)) '(4 5 6))
+;(test (mconcat '(1 2 3) '()) '(1 2 3))
+;(test (mconcat '() '()) '())
+;(test (mconcat '(1 2 3 4) '(a b c d)) '(1 2 3 4 a b c d))
+
 ;Ejercicio 07.- Función mmap
 (define mmap
   (lambda (funcion lista)
