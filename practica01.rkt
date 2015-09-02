@@ -85,12 +85,12 @@
 ;(test (zip '(8 9 1 2) '(3 4)) '((8 3) (9 4)))      
 
 ;Ejercicio 05.- Función reduce
-(define reduce
-  (lambda (funcion lista)
-    (cond
-      [(null? lista) lista]
-      [(symbol=? (numElementos lista) 1) (first lista)]
-      [else (funcion (funcion (first lista) (second lista)) (reduce funcion (cdr (cdr lista))))])))
+(define reduce (lambda (funcion lista base)
+                 (cond
+                   [(null? lista) base]
+                   [(eqv? (numElementos lista) 1) (first lista)]
+                   [else (funcion (funcion (first lista) (second lista)) (reduce funcion (cdr (cdr lista)) base))])))
+
 
 ;Sección II
 ;Ejercicio 06.- Función mconcat
