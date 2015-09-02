@@ -39,18 +39,10 @@
 ;(test (average '(1 1 1 1 1 1 1 1 1 1 1 1)) 1)
 
 ;Ejercicio 03.- Función primes
-;Implementamos las funciones auxiliares isPrime
+;Implementamos las funciones auxiliares isPrime, primAux y reverse, que son las que hacen que funcion la funcion primes
 (define primes
   (lambda (n)
     (primAux n 2 '())))
-
-(define isPrime
-  (lambda (n p)
-    (cond
-      [(= n p) #t]
-      [(= (modulo p n) 0) #f]
-      [else (isPrime (+ n 1) p)])))
-  
 
 (define primAux
   (lambda (n m acc)
@@ -58,7 +50,14 @@
       [(= (+ n 1) m) (reverse acc '())]
       [(isPrime 2 m) (primAux n (+ m 1) (cons m acc))]
       [else (primAux n (+ m 1) acc)])))
-  
+
+(define isPrime
+  (lambda (n p)
+    (cond
+      [(= n p) #t]
+      [(= (modulo p n) 0) #f]
+      [else (isPrime (+ n 1) p)])))
+
 (define reverse
   (lambda (lista acc)
     (cond
