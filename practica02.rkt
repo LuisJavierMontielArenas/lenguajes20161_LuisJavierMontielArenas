@@ -25,8 +25,3 @@
   [Rectangle (esquinasi Position?)
              (ancho number?)
              (largo number?)])
-
-(define setvalueA
- (lambda (arre pos num)
-  (cond
-    [(null? arre) ". . setvalueA: Out of bounds"])))
