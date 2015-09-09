@@ -29,4 +29,11 @@
 (define setvalueA
  (lambda (arre pos num)
   (cond
-    [(null? arre) ". . setvalueA: Out of bounds"])))
+    [(null? arre) ". . setvalueA: Out of bounds"]
+    [(> pos numElementos(arre)) ". . setvalueA: Out of bounds"])))
+
+(define numElementos
+  (lambda (lista)
+    (cond
+     [(null? lista) 0]
+     [else (+ 1 (numElementos (cdr lista)))])))
