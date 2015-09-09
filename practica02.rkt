@@ -49,3 +49,19 @@
                [(zero? n) (MEmpty)]
                [(null? l) (MEmpty)]
                [else (MCons (first l) (MArray2MList (MArray (- n 1) (cdr l))))])])))
+
+
+
+
+
+
+
+
+(define concatML
+  (lambda (lst1 lst2)
+    (type-case MList lst1
+      [MEmpty () lst2]
+      [MCons(x xs)
+            (cond
+              [(MEmpty? lst1) lst2]
+              [else (MCons x (concatML xs lst2))])])))
