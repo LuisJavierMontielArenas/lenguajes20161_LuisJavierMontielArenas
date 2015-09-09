@@ -41,3 +41,11 @@
       [(zero? pos) (cons num (cdr lst))]
       [else (cons (first lst)(MReplace (cdr lst) (- pos 1) num))])))
 
+(define MArray2MList
+  (lambda (arre)
+    (type-case Array arre
+      [MArray(n l)
+             (cond
+               [(zero? n) (MEmpty)]
+               [(null? l) (MEmpty)]
+               [else (MCons (first l) (MArray2MList (MArray (- n 1) (cdr l))))])])))
