@@ -25,3 +25,19 @@
   [Rectangle (esquinasi Position?)
              (ancho number?)
              (largo number?)])
+             
+(define setvalueA
+  (lambda (arre pos num)
+    (type-case Array arre
+      [MArray(n l)
+             (cond
+               [(<= n pos) error ". . setvalueA: Out of bounds"]
+               [else (MArray n (MReplace l pos num))])])))
+
+(define MReplace
+  (lambda (lst pos num)
+    (cond
+      [(null? lst) lst]
+      [(zero? pos) (cons num (cdr lst))]
+      [else (cons (first lst)(MReplace (cdr lst) (- pos 1) num))])))
+
