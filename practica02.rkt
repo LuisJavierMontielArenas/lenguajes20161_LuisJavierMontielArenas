@@ -1,22 +1,31 @@
 #lang plai
 
+;;Definir any para que se puedan hacer estructuras de todo tipo
+(define (any? x) #t)
+
+;;Sección 1
+;;01.- Definir Array
 (define-type Array
-  [MArray (n number?) 
+  [MArray (n any?) 
           (lst list?)])
 
+;;02.- Definir List
 (define-type MList
   [MEmpty]
-  [MCons (n number?)
+  [MCons (n any?)
          (lst MList?)])
 
+;;03.- Definir NTree
 (define-type NTree
   [TLEmpty]
   [NodeN (n number?) (list list?)])
 
+;;04.- Definir Position
 (define-type Position
   [2D-Point (primero number?)
             (segundo number?)])
 
+;;05.- Definir Figure
 (define-type Figure
   [Circle (centro Position?)
           (radio number?)]
@@ -25,7 +34,9 @@
   [Rectangle (esquinasi Position?)
              (ancho number?)
              (largo number?)])
-             
+
+;;Sección 2
+;;06.- Definir setvalueA
 (define setvalueA
   (lambda (arre pos num)
     (type-case Array arre
@@ -33,7 +44,8 @@
              (cond
                [(<= n pos) error ". . setvalueA: Out of bounds"]
                [else (MArray n (MReplace l pos num))])])))
-
+;;Función auxiliar MReplace
+;;Se le pasa una lista, una posición y un valor, cambia el valor que haya en la posición que se pasa por el valor.
 (define MReplace
   (lambda (lst pos num)
     (cond
@@ -41,6 +53,7 @@
       [(zero? pos) (cons num (cdr lst))]
       [else (cons (first lst)(MReplace (cdr lst) (- pos 1) num))])))
 
+;;07.- Definir MArray2MList
 (define MArray2MList
   (lambda (arre)
     (type-case Array arre
@@ -50,13 +63,9 @@
                [(null? l) (MEmpty)]
                [else (MCons (first l) (MArray2MList (MArray (- n 1) (cdr l))))])])))
 
+;;08.- Definir printML
 
-
-
-
-
-
-
+;;09.- concatML
 (define concatML
   (lambda (lst1 lst2)
     (type-case MList lst1
@@ -65,3 +74,15 @@
             (cond
               [(MEmpty? lst1) lst2]
               [else (MCons x (concatML xs lst2))])])))
+
+;;10.- Definir lenghtML
+(define lengthML
+  (lambda (lst)
+    (type-case MList lst
+      [MEmpty () 0]
+      [MCons (x xs)
+             (cond
+               [(MEmpty? lst) 0]
+               [else (+ 1 (lengthML xs))])])))
+
+;;11.- Definir mapML
