@@ -64,6 +64,18 @@
                [else (MCons (first l) (MArray2MList (MArray (- n 1) (cdr l))))])])))
 
 ;;08.- Definir printML
+(define printML
+  (lambda (lst)
+    (~a "[" (restoDelPrint lst))))
+
+(define restoDelPrint
+  (lambda (lst)
+    (type-case MList lst
+      [MEmpty () "]"]
+      [MCons (x xs)
+             (cond
+               [(MEmpty? xs) (~a x "]")]
+               [else (~a (~a x ",") (restoDelPrint xs))])])))
 
 ;;09.- concatML
 (define concatML
@@ -86,3 +98,10 @@
                [else (+ 1 (lengthML xs))])])))
 
 ;;11.- Definir mapML
+(define mapML
+  (lambda (lst funcion)
+    (type-case MList lst
+      [MEmpty () MEmpty]
+      [MCons (x xs)
+             (cond
+             [MCons (funcion x) (mapML xs funcion)])])))
