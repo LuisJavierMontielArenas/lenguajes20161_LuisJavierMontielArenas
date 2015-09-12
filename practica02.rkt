@@ -105,6 +105,13 @@
       [MCons (x xs)
              (cond
              [MCons (funcion x) (mapML xs funcion)])])))
+             
+;;12.- Definir filterML
+(define filterML
+  (lambda (f l)
+    (cond
+      [(MEmpty? l) (MEmpty)]
+      [(if (f(MCons-n l)) (MCons (MCons-n l) (filterML f (MCons-lst l))) (filterML f (MCons-lst l)))])))
 
 ;;17.- Definir area
 (define (area figure)
