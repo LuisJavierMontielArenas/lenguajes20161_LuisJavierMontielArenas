@@ -105,3 +105,33 @@
       [MCons (x xs)
              (cond
              [MCons (funcion x) (mapML xs funcion)])])))
+
+;;17.- Definir area
+(define (area figure)
+  (type-case Figure figure
+    [Circle (c r)
+            (* pi (expt r 2))]
+    [Square (e l)
+            (* l l)]
+    [Rectangle (e a l)
+               (* a l)]))
+
+;;18.- Definir in-figure?
+(define (in-figure? fig point)
+(type-case Figure fig
+  [Circle (c r)
+          (if(<= (+ (expt(- (2D-Point-primero c)(2D-Point-primero point)) 2)
+                    (expt(- (2D-Point-segundo c)(2D-Point-segundo point)) 2))
+                 (* r r)) #t #f)]
+  [Square (e l)
+          (if (and (and (>= (2D-Point-primero point) (2D-Point-primero e))
+                        (<= (2D-Point-primero point) (+ l (2D-Point-primero e))))
+                   (and (>= (2D-Point-segundo point) (2D-Point-segundo e))
+                        (<= (2D-Point-segundo point) (+ l (2D-Point-segundo e))))) #t #f)]
+  [Rectangle (e l a)
+             (if(and
+                 (and (>= (2D-Point-primero point) (2D-Point-primero e))
+                      (<= (2D-Point-primero point) (+ l (2D-Point-primero e)) ))
+                 (and (>= (2D-Point-segundo point) (2D-Point-segundo e))
+                      (<= (2D-Point-segundo point) (+ a (2D-Point-segundo e)))))
+                #t #f)]))
