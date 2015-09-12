@@ -99,12 +99,10 @@
 
 ;;11.- Definir mapML
 (define mapML
-  (lambda (lst funcion)
-    (type-case MList lst
-      [MEmpty () MEmpty]
-      [MCons (x xs)
-             (cond
-             [MCons (funcion x) (mapML xs funcion)])])))
+  (lambda (funcion lis)
+    (cond
+      [(MEmpty? lis) (MEmpty)]
+      [else (MCons (funcion(MCons-n lis)) (mapML funcion(MCons-lst lis)))])))
              
 ;;12.- Definir filterML
 (define filterML
