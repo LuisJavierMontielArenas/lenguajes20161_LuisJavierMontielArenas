@@ -132,6 +132,14 @@
 
 (define plazas (MCons plaza-satelite (MCons plaza-perisur (MEmpty))))
 
+;;13.- Definir haversine
+
+;;14.- Definir gps-coordinates
+
+;;15.- Definir closest-building
+
+;;16.- buildings-at-distance
+
 ;;17.- Definir area
 (define (area figure)
   (type-case Figure figure
@@ -141,7 +149,6 @@
             (* l l)]
     [Rectangle (e a l)
                (* a l)]))
-;;Definir gps-coordinates
 
 
 ;;18.- Definir in-figure?
