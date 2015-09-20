@@ -26,7 +26,43 @@
                (min 4 rest range)
                (+ 1 (maxi 4 rest range))))
     (list r w f ae an m)))
-         
+    
+;;Test de zones
+(test (zones 50 180) (list (resting 50 114.0)
+                           (warm-up 115.0 127.0)
+                           (fat-burning 128.0 140.0)
+                           (aerobic 141.0 153.0)
+                           (anaerobic 154.0 166.0)
+                           (maximum 167.0 180.0)))
+      
+(test (zones 80 120) (list (resting 80 99.0)
+                           (warm-up 100.0 103.0)
+                           (fat-burning 104.0 107.0)
+                           (aerobic 108.0 111.0)
+                           (anaerobic 112.0 115.0)
+                           (maximum 116.0 120.0)))
+
+(test (zones 90 160) (list (resting 90 124.0)
+                           (warm-up 125.0 131.0)
+                           (fat-burning 132.0 138.0)
+                           (aerobic 139.0 145.0)
+                           (anaerobic 146.0 152.0)
+                           (maximum 153.0 160.0)))
+
+(test (zones 110 200) (list (resting 110 154.0)
+                            (warm-up 155.0 163.0)
+                            (fat-burning 164.0 172.0)
+                            (aerobic 173.0 181.0)
+                            (anaerobic 182.0 190.0)
+                            (maximum 191.0 200.0)))
+
+(test (zones 50 100) (list (resting 50 74.0)
+                           (warm-up 75.0 79.0)
+                           (fat-burning 80.0 84.0)
+                           (aerobic 85.0 89.0)
+                           (anaerobic 90.0 94.0)
+                           (maximum 95.0 100.0)))
+
 (define my-zones (zones 50 180))
 
 ;;Ejercicio 2.- Get-zone
