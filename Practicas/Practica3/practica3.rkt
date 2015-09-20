@@ -34,11 +34,11 @@
   (lambda (simbolo lista)
     (cond
       [(null? lista) error "Lista vacía"]
-      [(equal? simbolo 'resting) (list-ref lista 0)]
+      [(equal? simbolo 'resting) (list-ref lista 0)] ;;list-ref regresa el elemnto de "lista" en la posición dada.
       [(equal? simbolo 'warm-up) (list-ref lista 1 )]
       [(equal? simbolo 'fat-burning) (list-ref lista 2)]
       [(equal? simbolo 'aerobic) (list-ref lista 3 )]
-      [(equal? simbolo 'anaerobic) (list-ref lista 4)] ;;list-ref regresa el elemnto de "lista" en la posición dada.
+      [(equal? simbolo 'anaerobic) (list-ref lista 4)]
       [(equal? simbolo 'maximum) (list-ref lista 5)]
       [else (error "No se encontró el simbolo")]))) ;;Si la lista tiene menos elementos, se lanza una excepción, o un error en caso que no se encuentre el simbolo en la lista.
 
