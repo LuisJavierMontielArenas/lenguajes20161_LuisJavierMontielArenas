@@ -30,3 +30,13 @@
              (cond
                [(and (EmptyBT? left) (EmptyBT? right)) 1]
                [else (+ (nlBT left) (nlBT right))])])))
+
+;;nnBT
+(define nnBT
+  (lambda (tree)
+    (type-case BTree tree
+      [EmptyBT () 0]
+      [BNode (comp left elem right)
+             (cond
+               [(and (EmptyBT? left) (EmptyBT? right)) 1]
+               [else (+ 1 (+ (nnBT left) (nnBT right)))])])))
