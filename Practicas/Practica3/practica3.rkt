@@ -78,6 +78,15 @@
       [(equal? simbolo 'maximum) (list-ref lista 5)]
       [else (error "No se encontró el simbolo")]))) ;;Si la lista tiene menos elementos, se lanza una excepción, o un error en caso que no se encuentre el simbolo en la lista.
 
+;;Test de Get-zone
+(test (get-zone 'resting my-zones) (resting 50 114.0))
+(test (get-zone 'warm-up my-zones) (warm-up 115.0 127.0))
+(test (get-zone 'fat-burning my-zones) (fat-burning 128.0 140.0))
+(test (get-zone 'aerobic my-zones) (aerobic 141.0 153.0))
+(test (get-zone 'anaerobic my-zones) (anaerobic 154.0 166.0))
+
+
+;;Sección 2
 ;;ninBT
 (define ninBT
   (lambda (tree)
