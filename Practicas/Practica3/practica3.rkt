@@ -2,6 +2,35 @@
 
 (require "practica3-base.rkt")
 
+;;Sección 1
+;;Ejercicio 1.- Zones
+#|
+(define (zones rest max)
+  (define range (- max rest))
+  (define (min i rest range) (let ([x (+ rest (* range (+ 0.5 (* 0.1 i))))]) x))
+  (define (maxi i rest range) (let ([x (- (+ rest (* range (+ 0.5 (* 0.1 (+ i 1))))) 1)]) x))
+  (define r (resting rest (+ (- (* range 0.5) 1) rest)))
+    (define w (warm-up
+               (min 0 rest range)
+               (maxi 0 rest range)))
+      (define f (fat-burning
+                 (min 1 rest range)
+                 (maxi 1 rest range)))
+        (define ae (aerobic
+                    (min 2 rest range)
+                    (maxi 2 rest range)))
+          (define an (anaerobic
+                      (min 3 rest range)
+                      (maxi 3 rest range)))
+            (define m (maximum
+                       (min 4 rest range)
+                       (maxi 4 rest range)))
+              (list r w f ae an m))
+              
+(define my-zones (zones 50 180))
+|#
+
+
 ;;ninBT
 (define ninBT
   (lambda (tree)
