@@ -4,32 +4,43 @@
 
 ;;Sección 1
 ;;Ejercicio 1.- Zones
-#|
-(define (zones rest max)
-  (define range (- max rest))
-  (define (min i rest range) (let ([x (+ rest (* range (+ 0.5 (* 0.1 i))))]) x))
-  (define (maxi i rest range) (let ([x (- (+ rest (* range (+ 0.5 (* 0.1 (+ i 1))))) 1)]) x))
-  (define r (resting rest (+ (- (* range 0.5) 1) rest)))
+(define zones
+  (lambda (rest max)
+    (define range (- max rest))
+    (define (min i rest range) (let ([x (+ rest (* range (+ 0.5 (* 0.1 i))))]) x))
+    (define (maxi i rest range) (let ([x (- (+ rest (* range (+ 0.5 (* 0.1 (+ i 1))))) 1)]) x))
+    (define r (resting rest (+ (- (* range 0.5) 1) rest)))
     (define w (warm-up
                (min 0 rest range)
                (maxi 0 rest range)))
-      (define f (fat-burning
-                 (min 1 rest range)
-                 (maxi 1 rest range)))
-        (define ae (aerobic
-                    (min 2 rest range)
-                    (maxi 2 rest range)))
-          (define an (anaerobic
-                      (min 3 rest range)
-                      (maxi 3 rest range)))
-            (define m (maximum
-                       (min 4 rest range)
-                       (maxi 4 rest range)))
-              (list r w f ae an m))
-              
+    (define f (fat-burning
+               (min 1 rest range)
+               (maxi 1 rest range)))
+    (define ae (aerobic
+                (min 2 rest range)
+                (maxi 2 rest range)))
+    (define an (anaerobic
+                (min 3 rest range)
+                (maxi 3 rest range)))
+    (define m (maximum
+               (min 4 rest range)
+               (+ 1 (maxi 4 rest range))))
+    (list r w f ae an m)))
+         
 (define my-zones (zones 50 180))
-|#
 
+;;Ejercicio 2.- Get-zone
+(define get-zone
+  (lambda (simbolo lista)
+    (cond
+      [(null? lista) error "Lista vacía"]
+      [(equal? simbolo 'resting) (list-ref lista 0)]
+      [(equal? simbolo 'warm-up) (list-ref lista 1 )]
+      [(equal? simbolo 'fat-burning) (list-ref lista 2)]
+      [(equal? simbolo 'aerobic) (list-ref lista 3 )]
+      [(equal? simbolo 'anaerobic) (list-ref lista 4)] ;;list-ref regresa el elemnto de "lista" en la posición dada.
+      [(equal? simbolo 'maximum) (list-ref lista 5)]
+      [else (error "No se encontró el simbolo")]))) ;;Si la lista tiene menos elementos, se lanza una excepción, o un error en caso que no se encuentre el simbolo en la lista.
 
 ;;ninBT
 (define ninBT
