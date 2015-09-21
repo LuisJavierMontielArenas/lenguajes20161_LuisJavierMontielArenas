@@ -115,6 +115,13 @@
              (cond
                [(and (EmptyBT? left) (EmptyBT? right)) 1]
                [else (+ (nlBT left) (nlBT right))])])))
+;;Pruebas de la función nlBT
+(test (nlBT (EmptyBT)) 0)
+(test (nlBT (BNode < (EmptyBT) 1 (EmptyBT))) 1)
+(test (nlBT (BNode < (BNode < (EmptyBT) 3 (EmptyBT)) 1 (BNode < (EmptyBT) 2 (EmptyBT)))) 2)
+(test (nlBT bigger-example) 6)
+(test (nlBT (bns (bns (bns ebt "pow" ebt) "ext" (bns ebt "trial" ebt)) "typed" (bns ebt "lambda" ebt))) 3)
+
 
 ;;nnBT
 (define nnBT
