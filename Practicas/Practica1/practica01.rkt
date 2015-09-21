@@ -186,3 +186,13 @@
 (test (mpowerset '(1 2)) '((1 2) (1) (2) ()))
 (test (mpowerset '(1 2 3)) '((1 2 3) (1 2) (1 3) (1) (2 3) (2) (3) ()))
 (test (mpowerset '((1 2 3) 1 2 3)) '(((1 2 3) 1 2 3) ((1 2 3) 1 2) ((1 2 3) 1 3) ((1 2 3) 1) ((1 2 3) 2 3) ((1 2 3) 2) ((1 2 3) 3) ((1 2 3)) (1 2 3) (1 2) (1 3) (1) (2 3) (2) (3) ()))
+
+;;preorderBT
+(define preorderBT
+  (lambda (tree)
+    (type-case BTree tree
+      [EmptyBT () '()]
+      [BNode (comp left elem right)
+             (cond
+               [(and (EmptyBT? left) (EmptyBT? right)) (cons elem '())]
+               [else (cons elem (append (preorderBT left) (preorderBT right)))])])))
