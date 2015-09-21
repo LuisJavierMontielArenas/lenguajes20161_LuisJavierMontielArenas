@@ -148,7 +148,8 @@
              (cond
                [(and (EmptyBT? left) (EmptyBT? right)) (BNode comp left (funct elem) right)]
                [else (BNode comp (mapBT funct left) (funct elem) (mapBT funct right))])])))
-               
+;;Nota, el árbol que se regresa en vez de tener ">", tiene "#<procedure:>>", y en vez de tener "string<?", tiene "#<procedure:string<?>"
+
 ;;preorderBT
 (define preorderBT
   (lambda (tree)
