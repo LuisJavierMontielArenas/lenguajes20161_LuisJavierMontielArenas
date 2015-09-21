@@ -165,6 +165,9 @@
              (cond
                [(and (EmptyBT? left) (EmptyBT? right)) (cons elem '())]
                [else (cons elem (append (preorderBT left) (preorderBT right)))])])))
+;;Prueba preorderBT
+;;Considerando arbol-base ya definido
+(test (preorderBT arbol-base) '("F" "B" "A" "D" "C" "E" "G" "I" "H"))
                
 ;;inorderBT
 (define inorderBT
@@ -175,6 +178,9 @@
              (cond
                [(and (EmptyBT? left) (EmptyBT? right)) (cons elem '())]
                [else (append (inorderBT left) (cons elem '()) (inorderBT right))])])))
+;;Prueba preorderBT
+;;Considerando arbol-base ya definido
+(test (inorderBT arbol-base) '("A" "B" "C" "D" "E" "F" "G" "H" "I"))
                
 ;;postorderBT
 (define postorderBT
@@ -185,3 +191,6 @@
              (cond
                [(and (EmptyBT? left) (EmptyBT? right)) (cons elem '())]
                [else (append (postorderBT left) (postorderBT right) (cons elem '()))])])))
+;;Prueba preorderBT
+;;Considerando arbol-base ya definido
+(test (postorderBT arbol-base) '("A" "C" "E" "D" "B" "H" "I" "G" "F"))
