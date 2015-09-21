@@ -132,3 +132,9 @@
              (cond
                [(and (EmptyBT? left) (EmptyBT? right)) 1]
                [else (+ 1 (+ (nnBT left) (nnBT right)))])])))
+;;Pruebas de nnBT
+(test (nnBT (EmptyBT)) 0)
+(test (nnBT (BNode < (BNode < (EmptyBT) 3 (EmptyBT)) 1 (BNode < (EmptyBT) 2 (EmptyBT)))) 3)
+(test (nnBT bigger-example) 11)
+(test (nnBT (bns (bns (bns ebt "pow" ebt) "ext" (bns ebt "trial" ebt)) "typed" (bns ebt "lambda" ebt))) 5)
+(test (nnBT (BNode < (EmptyBT) 1 (EmptyBT))) 1)
