@@ -148,3 +148,33 @@
              (cond
                [(and (EmptyBT? left) (EmptyBT? right)) (BNode comp left (funct elem) right)]
                [else (BNode comp (mapBT funct left) (funct elem) (mapBT funct right))])])))
+               
+;;preorderBT
+(define preorderBT
+  (lambda (tree)
+    (type-case BTree tree
+      [EmptyBT () '()]
+      [BNode (comp left elem right)
+             (cond
+               [(and (EmptyBT? left) (EmptyBT? right)) (cons elem '())]
+               [else (cons elem (append (preorderBT left) (preorderBT right)))])])))
+               
+;;inorderBT
+(define inorderBT
+  (lambda (tree)
+    (type-case BTree tree
+      [EmptyBT () '()]
+      [BNode (comp left elem right)
+             (cond
+               [(and (EmptyBT? left) (EmptyBT? right)) (cons elem '())]
+               [else (append (inorderBT left) (cons elem '()) (inorderBT right))])])))
+               
+;;postorderBT
+(define postorderBT
+  (lambda (tree)
+    (type-case BTree tree
+      [EmptyBT () '()]
+      [BNode (comp left elem right)
+             (cond
+               [(and (EmptyBT? left) (EmptyBT? right)) (cons elem '())]
+               [else (append (postorderBT left) (postorderBT right) (cons elem '()))])])))
