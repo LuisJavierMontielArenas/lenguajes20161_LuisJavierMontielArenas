@@ -85,6 +85,32 @@
 (test (get-zone 'aerobic my-zones) (aerobic 141.0 153.0))
 (test (get-zone 'anaerobic my-zones) (anaerobic 154.0 166.0))
 
+;;Ejercicio 3.- bpm->zone 
+(define bpm->zone
+  (lambda (lista zone)
+    (cond
+      [(null? zone) empty]
+      [(null? lista) empty]
+      [else (append
+             (if (and (>= (first lista) (resting-low (first zone)))
+                      (<= (first lista) (resting-high (first zone))))
+                 (list (first zone)) '())
+             (if (and (>= (first lista) (warm-up-low (second zone)))
+                      (<= (first lista) (warm-up-high (second zone))))
+                 (list (second zone)) '())
+             (if (and (>= (first lista) (fat-burning-low (third zone)))
+                      (<= (first lista) (fat-burning-high (third zone))))
+                 (list (third zone)) '())
+             (if (and (>= (first lista) (aerobic-low (fourth zone)))
+                      (<= (first lista) (aerobic-high (fourth zone))))
+                 (list (fourth zone)) '())
+             (if (and (>= (first lista) (anaerobic-low (fifth zone)))
+                      (<= (first lista) (anaerobic-high (fifth zone))))
+                 (list (fifth zone)) '())
+             (if (and (>= (first lista) (maximum-low (sixth zone)))
+                      (<= (first lista) (maximum-high (sixth zone))))
+                 (list (sixth zone)) '())
+             (bpm->zone (cdr lista) zone))])))
 
 ;;Sección 2
 ;;Árbol que se usará en varias pruebas
