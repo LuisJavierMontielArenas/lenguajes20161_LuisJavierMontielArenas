@@ -138,3 +138,13 @@
 (test (nnBT bigger-example) 11)
 (test (nnBT (bns (bns (bns ebt "pow" ebt) "ext" (bns ebt "trial" ebt)) "typed" (bns ebt "lambda" ebt))) 5)
 (test (nnBT (BNode < (EmptyBT) 1 (EmptyBT))) 1)
+
+;;mapBT
+(define mapBT
+  (lambda (funct tree)
+    (type-case BTree tree
+      [EmptyBT () tree]
+      [BNode (comp left elem right)
+             (cond
+               [(and (EmptyBT? left) (EmptyBT? right)) (BNode comp left (funct elem) right)]
+               [else (BNode comp (mapBT funct left) (funct elem) (mapBT funct right))])])))
