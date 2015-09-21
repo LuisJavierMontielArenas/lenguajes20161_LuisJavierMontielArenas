@@ -196,3 +196,13 @@
              (cond
                [(and (EmptyBT? left) (EmptyBT? right)) (cons elem '())]
                [else (cons elem (append (preorderBT left) (preorderBT right)))])])))
+               
+;;inorderBT
+(define inorderBT
+  (lambda (tree)
+    (type-case BTree tree
+      [EmptyBT () '()]
+      [BNode (comp left elem right)
+             (cond
+               [(and (EmptyBT? left) (EmptyBT? right)) (cons elem '())]
+               [else (append (inorderBT left) (cons elem '()) (inorderBT right))])])))
