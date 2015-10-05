@@ -19,3 +19,9 @@ No implementaron las funciones filterML, haversine, closest-building y  building
 No tienen ninguna prueba.
 
 **Calificación: 5**
+
+### Practica 3
+No implementaron las funciones create-trackpoints, total-distance, average-hr,
+max-hr, collapse-trackpoints.
+
+**Calificación: 6**
