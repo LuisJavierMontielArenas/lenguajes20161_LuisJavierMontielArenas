@@ -9,13 +9,13 @@
     [numS (n) (num n)]
     [withS (bindings body) (app (fun (map (lambda (x) (bind-name x)) bindings)
                                      (desugar body))
-                                (map (lambda (x) (bind-val x)) bindings))]
+                                (map (lambda (x)(desugar (bind-val x))) bindings))]
+    [with*S (bindings body) (app (fun (map (lambda (x) (bind-name x)) bindings) (desugar body))
+                                 (map (lambda (x) (desugar (bind-val x))) bindings))]
     [idS (name) (id name)]
-    [funS (params body) (fun params(desugar body))]
-    [else '()]))
-
-(error 'desugar "Not implemented")
-
+    [funS (params body) (fun params (desugar body))]
+    [appS (f l) (app (desugar f) (desugar l))]
+    [binopS (f l r) (binop f (desugar l) (desugar r))]))
 
 (test (desugar (parse '{+ 3 4})) (binop + (num 3) (num 4)))
 (test (desugar (parse '{+ {- 3 4} 7})) (binop + (binop - (num 3) (num 4)) (num 7)))
