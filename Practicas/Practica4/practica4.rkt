@@ -4,33 +4,73 @@
 
 (print-only-errors true)
 
+;;Desugar
 (define (desugar expr)
   (type-case FAES expr
     [numS (n) (num n)]
     [withS (bindings body) (app (fun (map (lambda (x) (bind-name x)) bindings)
                                      (desugar body))
                                 (map (lambda (x)(desugar (bind-val x))) bindings))]
-    [with*S (bindings body) (app (fun (map (lambda (x) (bind-name x)) bindings) (desugar body))
-                                 (map (lambda (x) (desugar (bind-val x))) bindings))]
+    [with*S (bindings body) (matryoshka bindings body)]
     [idS (name) (id name)]
     [funS (params body) (fun params (desugar body))]
     [appS (f l) (app (desugar f) (desugar l))]
     [binopS (f l r) (binop f (desugar l) (desugar r))]))
 
-(test (desugar (parse '{+ 3 4})) (binop + (num 3) (num 4)))
-(test (desugar (parse '{+ {- 3 4} 7})) (binop + (binop - (num 3) (num 4)) (num 7)))
-(test (desugar (parse '{with {{x {+ 5 5}}} x})) (app (fun '(x) (id 'x)) (list (binop + (num 5) (num 5))) ))
+;;Funcion Matryoshka
+(define (matryoshka bindings body)
+  (cond
+    [(empty? bindings) (desugar body)]
+    [else (app (fun(list (bind-name(car bindings))
+                         (matryoshka (cdr bindings) body))
+                   (list (desugar (bind-val (car bindings))))))]))
+
+;;Funcion interp: FAE -> FAE-Value
+(define (interp expr env)
+  (type-case FAE expr
+    [num (n) (numV n)]
+    [binop (f x y) (numV (f (numV-n (interp x env)) (numV-n (interp y env))))]
+    [id (v) (lookup v env)]
+    [fun (bound-id bound-body)
+         (closureV bound-id bound-body env)]
+    [app (fun-expr args-expr)
+         (local([define funV (interp fun-expr env)])
+           (if (closureV? funV)
+               (let* ([funV-param (closureV-param funV)]
+                      [num-params (length funV-param)]
+                      [num-args (length args-expr)])
+                 (interp (closureV-body funV)
+                         (if (= num-params num-args)
+                             (multi-param funV-param args-expr env (closureV-env funV))
+                             (error 'interp (~a "Numero de parametros incorrecto: ")))))
+               (error 'interp (string-append (~a funV) "No FAE"))))]))
+
+
+;;Multi-param
+(define (multi-param params args args-env a-env)
+  (if (empty? params) a-env
+      (multi-param (cdr params) (cdr args) args-env
+                   (aSub (car params)
+                         (interp (car args) args-env) a-env))))
+
+;;Lookup
+(define (lookup name env)
+  (type-case Env env
+    [mtSub () (error 'lookup (~a "no hay identificador ligado: " name))]
+    [aSub (bound-name bound-value rest-env)
+          (if (symbol=? bound-name name) bound-value (lookup name rest-env))]))
+
 
 (define (cparse sexp)
   (desugar (parse sexp)))
 
-(define (interp expr env)
-  ;; Implementar interp
-  (error 'interp "Not implemented"))
-
 (define (rinterp expr)
   (interp expr (mtSub)))
 
+#|====TESTS====|#
+(test (desugar (parse '{+ 3 4})) (binop + (num 3) (num 4)))
+(test (desugar (parse '{+ {- 3 4} 7})) (binop + (binop - (num 3) (num 4)) (num 7)))
+(test (desugar (parse '{with {{x {+ 5 5}}} x})) (app (fun '(x) (id 'x)) (list (binop + (num 5) (num 5))) ))
 (test (rinterp (cparse '3)) (numV 3))
 (test (rinterp (cparse '{+ 3 4})) (numV 7))
 (test (rinterp (cparse '{+ {- 3 4} 7})) (numV 6))
