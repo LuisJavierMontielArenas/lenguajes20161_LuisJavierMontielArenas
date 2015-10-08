@@ -17,7 +17,7 @@
     [appS (f l) (app (desugar f) (desugar l))]
     [binopS (f l r) (binop f (desugar l) (desugar r))]))
 
-;;Funcion Matryoshka
+;;Funcion matryoshka
 (define (matryoshka bindings body)
   (cond
     [(empty? bindings) (desugar body)]
