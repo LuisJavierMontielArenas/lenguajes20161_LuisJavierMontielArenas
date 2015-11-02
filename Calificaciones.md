@@ -28,6 +28,13 @@ max-hr, collapse-trackpoints.
 
 ## Tareas
 
+### Tarea 1
+Problema I: Solo respondieron la primera pregunta.
+Problema II: Bien.
+Problem III: Su forma de Bruijn es incorrecta, no pusiste los resultados parciales.
+
+**Calificación: 5**
+
 ### Tarea 2
 
 **Calificación: 0**
