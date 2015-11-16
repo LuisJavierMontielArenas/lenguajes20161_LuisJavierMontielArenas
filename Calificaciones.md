@@ -25,3 +25,20 @@ No implementaron las funciones create-trackpoints, total-distance, average-hr,
 max-hr, collapse-trackpoints.
 
 **Calificación: 6**
+
+### Practica 4
+
+**Calificación: 0**
+
+## Tareas
+
+### Tarea 1
+Problema I: Solo respondieron la primera pregunta.
+Problema II: Bien.
+Problem III: Su forma de Bruijn es incorrecta, no pusiste los resultados parciales.
+
+**Calificación: 5**
+
+### Tarea 2
+
+**Calificación: 0**
