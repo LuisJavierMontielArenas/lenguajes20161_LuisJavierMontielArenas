@@ -42,3 +42,7 @@ Problem III: Su forma de Bruijn es incorrecta, no pusiste los resultados parcial
 ### Tarea 2
 
 **Calificación: 0**
+
+### Tarea 3
+
+**Calificación: 0**
